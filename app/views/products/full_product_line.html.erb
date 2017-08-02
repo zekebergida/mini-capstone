@@ -1,1 +1,7 @@
-all products
+<p>Our full product line</p>
+<% @full_line.each do |item| %>
+<%= item.image %>
+<%= item.name %>
+<%= item.price %>
+<%= item.description %>
+<%end%>
