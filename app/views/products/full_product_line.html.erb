@@ -1,7 +1,9 @@
 <p>Our full product line</p>
+<hr>
 <% @full_line.each do |item| %>
-<%= item.image %>
-<%= item.name %>
-<%= item.price %>
-<%= item.description %>
+  <p><%= item.image %></p>
+  <p><%= item.name %></p>
+  <p>$<%= item.price %></p>
+  <p><%= item.description %></p>
+<hr>
 <%end%>
