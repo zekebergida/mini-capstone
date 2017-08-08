@@ -1,14 +1,19 @@
 class ProductsController < ApplicationController
 
-  def all_products
-    @full_line = Product.all
-    render 'full_product_line.html.erb'
+  def index
+    @products = Product.all
+    render 'index.html.erb'
   end
 
-  def add_product
+  def show
+    @product = Product.find_by(id: params[:id])
+    render 'show.html.erb'
   end
 
-  def save_product
+  def new
+  end
+
+  def create
     new_product = Product.new(
       name: params[:name],
       price: params[:price],
@@ -16,8 +21,34 @@ class ProductsController < ApplicationController
       image: params[:image]
       )
     new_product.save
-    @full_line = Product.all
-    render 'full_product_line.html.erb'
+    @products = Product.all
+    render 'index.html.erb'
+  end
+
+  def edit
+    @product = Product.find_by(id: params[:id])
+    render 'edit.html.erb'
+  end
+
+  def update
+    @product = Product.find_by(id: params[:id])
+    @product.update(
+      name: params[:name],
+      price: params[:price],
+      description: params[:description],
+      image: params[:image]
+      )
+
+    @products = Product.all
+    render 'index.html.erb'
+  end
+
+  def destroy
+    @product = Product.find_by(id: params[:id])
+    @product.destroy
+
+    @products = Product.all
+    render 'index.html.erb'
   end
 
 end

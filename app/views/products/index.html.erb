@@ -1,0 +1,9 @@
+<p>Our full product line</p>
+<hr>
+<% @products.each do |product| %>
+  <p><%= product.image %></p>
+  <h2><a href="http://localhost:3000/products/<%= product.id %>"><%= product.name %></a></h2>
+  <p>$<%= product.price %></p>
+  <p><%= product.description %></p>
+<hr>
+<%end%>
