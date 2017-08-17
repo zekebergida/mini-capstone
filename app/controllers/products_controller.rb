@@ -1,12 +1,24 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all
+    if params[:name]
+      @products = Product.where("name LIKE ?", "%#{params[:name]}%")
+    elsif params[:price_category] == "discount"
+      @products = Product.where("price <= ?", 3)
+    elsif params[:sort_by] && params[:order]
+      @products = Product.order(params[:sort_by] => params[:order])
+    else
+      @products = Product.order(:name)
+    end
     render 'index.html.erb'
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
+    if params[:id] == "random"
+      @product = Product.all.sample
+    else
+      @product = Product.find_by(id: params[:id])
+    end
     render 'show.html.erb'
   end
 
@@ -14,15 +26,17 @@ class ProductsController < ApplicationController
   end
 
   def create
-    new_product = Product.new(
+    product1 = Product.new(
       name: params[:name],
       price: params[:price],
       description: params[:description],
       image: params[:image]
       )
-    new_product.save
-    @products = Product.all
-    render 'index.html.erb'
+    product1.save
+    #@products = Product.all
+    #render 'index.html.erb'
+    flash[:success] = "You just added the product: #{product1.name}."
+    redirect_to "/products/#{product1.id}"
   end
 
   def edit
@@ -39,16 +53,20 @@ class ProductsController < ApplicationController
       image: params[:image]
       )
 
-    @products = Product.all
-    render 'index.html.erb'
+    #@products = Product.all
+    #render 'index.html.erb'
+    flash[:success] = "You just updated the product: #{@product.name}."
+    redirect_to "/products/#{@product.id}"
   end
 
   def destroy
     @product = Product.find_by(id: params[:id])
     @product.destroy
 
-    @products = Product.all
-    render 'index.html.erb'
+    #@products = Product.all
+    #render 'index.html.erb'
+    flash[:danger] = "You just deleted the product: #{@product.name}"
+    redirect_to "/products"
   end
 
 end

@@ -1,9 +1,17 @@
-<p>Our full product line</p>
+<h1>Our full product line</h1>
 <hr>
+<p><a href="/products/new">Add Product</a></p>
+<hr>
+<div class="row">
 <% @products.each do |product| %>
-  <p><%= product.image %></p>
+  <div class="col-md-4">
+  <div class="well">
   <h2><a href="http://localhost:3000/products/<%= product.id %>"><%= product.name %></a></h2>
   <p>$<%= product.price %></p>
   <p><%= product.description %></p>
-<hr>
+  <p><img src="<%= product.images.first.location %>"></p>
+  </div>
+  <hr>
+  </div>
 <%end%>
+</div>

@@ -1,8 +1,18 @@
 
-<p>   <%= @product.image %></p>
 <p>   <%= @product.name %></p>
-<p>   $<%= @product.price %></p>
+<% @product.images.all.each do |image| %>
+<p><img src="<%= image.location %>" ></p>
+<% end %>
 <p>   <%= @product.description %></p>
+<p> By:  <%= @product.supplier.name %></p>
+<p> Price:  <%= number_to_currency(@product.price) %>  <%=@product.sale_message%></p>
+<p> Tax:    $<%= @product.tax %></p>
+<p> Total:  $<%= @product.total %></p>
+<hr>
+<p><a href="/products/<%=@product.id%>/edit">Edit Product</a></p>
+<hr>
+<p><a href="/products">Return to All Products</a>
+<hr>
 
 <%= form_tag "/products/#{@product.id}", method: :delete do %>
   <input type="submit" value="Delete Product">
