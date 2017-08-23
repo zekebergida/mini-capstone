@@ -1,12 +1,17 @@
 class ProductsController < ApplicationController
 
   def index
-    if params[:name]
-      @products = Product.where("name LIKE ?", "%#{params[:name]}%")
-    elsif params[:price_category] == "discount"
-      @products = Product.where("price <= ?", 3)
-    elsif params[:sort_by] && params[:order]
-      @products = Product.order(params[:sort_by] => params[:order])
+    # if params[:name]
+    #   @products = Product.where("name LIKE ?", "%#{params[:name]}%")
+    # elsif params[:price_category] == "discount"
+    #   @products = Product.where("price <= ?", 3)
+    # elsif params[:sort_by] && params[:order]
+    #   @products = Product.order(params[:sort_by] => params[:order])
+    # else
+    #   @products = Product.order(:name)
+    # end
+    if params[:category]
+      @products = Category.find_by(name: params[:category]).products
     else
       @products = Product.order(:name)
     end

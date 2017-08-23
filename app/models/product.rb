@@ -1,6 +1,9 @@
 class Product < ApplicationRecord
+  has_many :category_products
+  has_many :categories, through: :category_products
   belongs_to :supplier
   has_many :images
+  has_many :orders
   def sale_message
     if price < 2
       "Discount Item!"

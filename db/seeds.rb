@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+products = Product.all
+products.each do |product|
+  image = Image.new(location: Faker::Avatar.image, product_id: product.id)
+  image.save
+end

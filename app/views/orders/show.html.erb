@@ -1,0 +1,12 @@
+<h2>You created an order!</h2>
+<p>Order Number:<%= @order.id %></p>
+<p>Item:<%= @order.product.name %></p>
+<p>Quantity:<%= @order.quantity %></p>
+Price
+<p>$<%= @order.subtotal %></p>
+tax
+<p>$<%= @order.tax %></p>
+total
+<p>$<%= @order.total %></p>
+<p>email address</p>
+<p><%= @order.user.email %></p>

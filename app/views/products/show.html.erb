@@ -9,6 +9,16 @@
 <p> Tax:    $<%= @product.tax %></p>
 <p> Total:  $<%= @product.total %></p>
 <hr>
+<%= form_tag "/orders", method: :post do%>
+  <div>
+    <h2>Buy</h2>
+    <p>Quantity:<input type="text" name="quantity" value="0"></p> 
+    <p><input type="hidden" value="<%= @product.id %>" name="product_id" ></p>
+    
+  <input type="submit" value="Buy Now!">
+  <%end%>
+
+
 <p><a href="/products/<%=@product.id%>/edit">Edit Product</a></p>
 <hr>
 <p><a href="/products">Return to All Products</a>
@@ -17,3 +27,4 @@
 <%= form_tag "/products/#{@product.id}", method: :delete do %>
   <input type="submit" value="Delete Product">
 <% end %>
+
