@@ -1,7 +1,9 @@
 <h2>You created an order!</h2>
 <p>Order Number:<%= @order.id %></p>
-<p>Item:<%= @order.product.name %></p>
-<p>Quantity:<%= @order.quantity %></p>
+<% @order.products.each do |product| %>
+  <p>Item:<%= product.name %></p> 
+  <p>Quantity:<%= @order.carted_products.find_by(product_id: product.id).quantity %></p>
+<% end %>
 Price
 <p>$<%= @order.subtotal %></p>
 tax

@@ -9,22 +9,22 @@
 <p> Tax:    $<%= @product.tax %></p>
 <p> Total:  $<%= @product.total %></p>
 <hr>
-<%= form_tag "/orders", method: :post do%>
+<%= form_tag "/cart", method: :post do%>
   <div>
-    <h2>Buy</h2>
+    <h2>Add To Cart</h2>
     <p>Quantity:<input type="text" name="quantity" value="0"></p> 
     <p><input type="hidden" value="<%= @product.id %>" name="product_id" ></p>
     
-  <input type="submit" value="Buy Now!">
+  <input type="submit" value="Add To Cart">
   <%end%>
 
-
-<p><a href="/products/<%=@product.id%>/edit">Edit Product</a></p>
 <hr>
 <p><a href="/products">Return to All Products</a>
 <hr>
-
-<%= form_tag "/products/#{@product.id}", method: :delete do %>
-  <input type="submit" value="Delete Product">
-<% end %>
+<% if current_user && current_user.admin %>
+  <p><a href="/products/<%=@product.id%>/edit">Edit Product</a></p>
+  <%= form_tag "/products/#{@product.id}", method: :delete do %>
+    <input type="submit" value="Delete Product">
+  <% end %>
+<% end %>  
 

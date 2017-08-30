@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-
+  before_action :authenticate_admin!, except:[:index, :show]
   def index
     # if params[:name]
     #   @products = Product.where("name LIKE ?", "%#{params[:name]}%")
@@ -28,20 +28,24 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @product = Product.new
+    render "new.html.erb"
   end
 
   def create
-    product1 = Product.new(
+    @product = Product.new(
       name: params[:name],
       price: params[:price],
       description: params[:description],
-      image: params[:image]
+      #image: params[:images]
+      supplier_id: params[:supplier_id]
       )
-    product1.save
-    #@products = Product.all
-    #render 'index.html.erb'
-    flash[:success] = "You just added the product: #{product1.name}."
-    redirect_to "/products/#{product1.id}"
+    if @product.save
+      flash[:success] = "You just added the product: #{@product.name}."
+      redirect_to "/products/#{@product.id}"
+    else
+      render "new.html.erb"
+    end  
   end
 
   def edit
@@ -51,17 +55,21 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find_by(id: params[:id])
-    @product.update(
+    @product.assign_attributes(
       name: params[:name],
       price: params[:price],
       description: params[:description],
-      image: params[:image]
-      )
+      #image: params[:images]
+      supplier_id: params[:supplier_id]
+    )
 
-    #@products = Product.all
-    #render 'index.html.erb'
-    flash[:success] = "You just updated the product: #{@product.name}."
-    redirect_to "/products/#{@product.id}"
+    if @product.save
+      flash[:success] = "You just updated the product: #{@product.name}."
+      redirect_to "/products/#{@product.id}"
+    else
+      render "edit.html.erb"
+    end
+
   end
 
   def destroy

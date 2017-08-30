@@ -1,6 +1,8 @@
 <h1>Our full product line</h1>
 <hr>
-<p><a href="/products/new">Add Product</a></p>
+<% if current_user && current_user.admin %>
+  <p><a href="/products/new">Add Product</a></p>
+<% end %>  
 <hr>
 <div class="row">
 <% @products.each do |product| %>
