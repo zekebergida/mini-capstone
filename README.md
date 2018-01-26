@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This ecommerce store was built during my time at Actualize coding bootcamp.
+In building it I learned a lot of back end fundementals including 
+- CRUD operations
+- RESTful routes
+- Database Migrations
+- Active Record
+- Table Associations
+- Authentication
+- Authorization
+- Validation
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+We learned Rails before learning JavaScript so this app doesn't contain any JavaScript.
